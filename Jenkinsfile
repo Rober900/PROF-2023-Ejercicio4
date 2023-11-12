@@ -8,7 +8,7 @@ pipeline {
                 sh '''
                         sqlite3 Employees.db <<EOF
                         -- Your SQLite commands here
-                        .output /sqlite.sql
+                        .dump > sqlite.sql
                         EOF
                     '''
             }
