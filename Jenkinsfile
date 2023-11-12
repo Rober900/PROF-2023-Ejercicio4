@@ -5,7 +5,8 @@ pipeline {
         stage('Backup') {
             steps {
                 echo 'Backup de la DB'
-                    sh 'sqlite3 Employees.db ".mode insert" ".output backup.sql" ".dump" ".quit"'
+                sh 'sqlite3 Employees.db ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
+                sh 'grep "^INSERT INTO" newBackup.sql | sed "s/^INSERT INTO/INSERT INTO new_table_name/" > backup.sql'
                 sh 'ls -l'
                 sh 'cat backup.sql'
             }
