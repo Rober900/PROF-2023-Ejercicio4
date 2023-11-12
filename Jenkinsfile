@@ -7,7 +7,8 @@ pipeline {
                 echo 'Backup de la DB'
                 sh 'sqlite3 Employees.db "select * from regions;" ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
                 sh 'grep "^INSERT INTO" newBackup.sql > backup.sql'
-                sh 'cat Employees.db'
+                sh 'cat newBackup.sql"
+                sh 'cat backup.sql"
 
             }
         }
@@ -23,14 +24,13 @@ pipeline {
             steps {
                 echo 'Carga del nuevo esquema'
                 sh 'sqlite3 Employees.db < sqlite.sql'
-                sh 'cat Employees.db'
             }
         }
         
         stage('Restore Data') {
             steps {
                 echo 'Restauración datos'
-                sh 'sqlite3 Employees.db ".mode insert" ".read backup.sql" "select * from regions;" ".quit"'
+                sh 'sqlite3 Employees.db ".read backup.sql" "select * from regions;" ".quit"'
             }
         }
     }
