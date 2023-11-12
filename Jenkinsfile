@@ -7,7 +7,6 @@ pipeline {
                 echo 'Backup de la DB'
                 sh 'sqlite3 Employees.db "select * from regions;" ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
                 sh 'grep "^INSERT INTO" newBackup.sql > backup.sql'
-                sh 'cat sqlite.sql'
             }
         }
         
@@ -21,7 +20,8 @@ pipeline {
         stage('Load Schema') {
             steps {
                 echo 'Carga del nuevo esquema'
-                sh 'sqlite3 Employees.db < sqlite.sql "select * from regions;"'
+                sh 'sqlite3 Employees.db < sqlite.sql'
+                sh 'cat Employees.db'
             }
         }
         
