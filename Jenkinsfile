@@ -5,18 +5,7 @@ pipeline {
         stage('Backup') {
             steps {
                 echo 'Backup de la DB'
-                sh '''sqlite3 Employees.db \
-
-        ".mode column" \
-
-        ".headers on" \
-
-        "select * \
-
-           from employees, jobs \
-
-           where jobs.job_id = 1 and employees.job_id = jobs.job_id;"
-           '''
+                sh 'sqlite3 Employees.db .dump'
             }
         }
         
