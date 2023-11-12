@@ -5,10 +5,8 @@ pipeline {
         stage('Backup') {
             steps {
                 echo 'Backup de la DB'
-                sh 'sqlite3 Employees.db "select * from regions;" ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
+                sh 'sqlite3 Employees.db ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
                 sh 'grep "^INSERT INTO" newBackup.sql > backup.sql'
-                sh 'cat newBackup.sql'
-                sh 'cat backup.sql'
 
             }
         }
@@ -30,7 +28,7 @@ pipeline {
         stage('Restore Data') {
             steps {
                 echo 'Restauración datos'
-                sh 'sqlite3 Employees.db ".read backup.sql" "select * from regions;" ".quit"'
+                sh 'sqlite3 Employees.db ".read backup.sql" ".quit"'
             }
         }
     }
