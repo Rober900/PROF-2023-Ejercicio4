@@ -20,7 +20,7 @@ pipeline {
         stage('Load Schema') {
             steps {
                 echo 'Carga del nuevo esquema'
-                sh 'sqlite3 Employees.db < sqlite.sql'
+                sh 'sqlite3 Employees.db < sqlite.sql "select * from regions;"'
             }
         }
         
