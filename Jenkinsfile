@@ -7,8 +7,8 @@ pipeline {
                 echo 'Backup de la DB'
                 sh 'sqlite3 Employees.db "select * from regions;" ".mode insert" ".output newBackup.sql" ".dump" ".quit"'
                 sh 'grep "^INSERT INTO" newBackup.sql > backup.sql'
-                sh 'cat newBackup.sql"
-                sh 'cat backup.sql"
+                sh 'cat newBackup.sql'
+                sh 'cat backup.sql'
 
             }
         }
