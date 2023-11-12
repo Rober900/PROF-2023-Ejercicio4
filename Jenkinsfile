@@ -6,7 +6,15 @@ pipeline {
             steps {
                 echo 'Backup de la DB'
                     sh '''
-                        sqlite3 Employees.db ".mode insert" ".output backup.sql" "SELECT * FROM ' || name || ';' FROM sqlite_master WHERE type = 'table';" ".quit"
+                        sqlite3 Employees.db ".mode insert" ".output backup.sql" 
+                        "select * from jobs"
+                        "select * from employees"
+                        "select * from dependents"
+                        "select * from departments"
+                        "select * from regions"
+                        "select * from countries"
+                        "select * from locations"
+                        ".quit"
                     '''
                 sh 'ls -l'
                 sh 'cat backup.sql'
