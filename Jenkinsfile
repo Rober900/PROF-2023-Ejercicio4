@@ -23,17 +23,13 @@ pipeline {
             steps {
                 echo 'Carga del nuevo esquema'
                 sh 'sqlite3 Employees.db < sqlite.sql'
-                sh 'ls -l'
-                sh 'cat Employees.db'
             }
         }
         
         stage('Restore Data') {
             steps {
                 echo 'Restauración datos'
-                sh 'sqlite3 Employees.db ".mode insert" ".read backup.sql" ".quit"'
-                sh 'ls -l'
-                sh 'cat Employees.db'
+                sh 'sqlite3 Employees.db ".mode insert" ".read backup.sql" "select * from regions;" ".quit"'
             }
         }
     }
