@@ -13,7 +13,7 @@ pipeline {
         stage('Delete DB') {
             steps {
                 echo 'Eliminación del esquema actual'
-                sh 'sqlite3 Employees.db DROP DATABASE'
+                sh 'sqlite3 DROP DATABASE Employees.db'
             }
         }
         
