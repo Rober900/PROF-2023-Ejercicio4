@@ -5,8 +5,7 @@ pipeline {
         stage('Backup') {
             steps {
                 echo 'Backup de la DB'
-                sh 'sqlite3 Employees.db'
-                sh '.output sqlite.sql'
+                sh 'sqlite3 Employees.db .output sqlite.sql'
             }
         }
         
