@@ -13,8 +13,7 @@ pipeline {
         stage('Delete DB') {
             steps {
                 echo 'Eliminación del esquema actual'
-                sh 'rm Employees.db'
-                
+                sh 'rm Employees.db'   
             }
         }
         
