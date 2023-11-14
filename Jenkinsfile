@@ -21,6 +21,7 @@ pipeline {
             steps {
                 echo 'Carga del nuevo esquema'
                 sh 'sqlite3 Employees.db < sqlite.sql'
+                
             }
         }
         
