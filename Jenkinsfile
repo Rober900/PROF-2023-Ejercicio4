@@ -14,6 +14,7 @@ pipeline {
             steps {
                 echo 'Eliminación del esquema actual'
                 sh 'rm Employees.db'
+                
             }
         }
         
